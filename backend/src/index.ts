@@ -4,6 +4,7 @@ import cors from 'cors';
 
 import indexRoutes from './routes/indexRoutes';
 import farmRoutes from './routes/farmRoutes';
+import pondRoutes from './routes/pondRoutes';
 
 
 class Server{
@@ -26,6 +27,7 @@ class Server{
     routes(): void {
         this.app.use('/',indexRoutes);
         this.app.use('/api/farms',farmRoutes);
+        this.app.use('/api/ponds',pondRoutes);
     }
 
     start(): void{

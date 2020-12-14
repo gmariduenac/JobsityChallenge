@@ -1,0 +1,16 @@
+<div class="colm-md-4" *ngFor="let farm of farms">
+<div class="card text-center">
+    <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+        {{farm.name}}
+        <button class="btn bnt-danger">
+            <i class="far fa-trash-alt"></i>
+        </button>
+    </div>
+    <div class="card-body">
+        <p>{{farm.description}}</p>
+        <a href="" class="btn btn-info btn-block">
+            EDIT FARM
+        </a>
+    </div>
+</div>
+</div>
