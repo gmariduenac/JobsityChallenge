@@ -1,0 +1,25 @@
+DROP DATABASE IF EXISTS ng_farms_db;
+
+CREATE DATABASE ng_farms_db;
+
+USE ng_farms_db;
+
+CREATE TABLE farm(
+    id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(180),
+    description VARCHAR(255),
+    image VARCHAR(200),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE pond(
+    id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(180),
+    size INTEGER,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+DESCRIBE farm;
+
+DESCRIBE pond;
