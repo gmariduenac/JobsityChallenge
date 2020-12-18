@@ -29,7 +29,7 @@ export class FarmsService {
     return this.http.delete(`${this.API_URI}/farms/${id}`);
   }
 
-  updateFarm(id:string, updatedFarm: Farm): Observable<Farm> {
+  updateFarm(id:string|number, updatedFarm: Farm): Observable<Farm> {
     return this.http.put(`${this.API_URI}/farms/${id}`,updatedFarm);
   }
 
