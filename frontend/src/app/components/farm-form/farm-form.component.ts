@@ -16,13 +16,18 @@ export class FarmFormComponent implements OnInit {
     id: 0,
     name: '',
     description: '',
-    image: '',
-    created_at: new Date()
+    image: 'http://anyurl.com',
+    created_at: new Date(),
+    size:0
   };
+
+  //farm: any = [];
 
   edit: boolean = false;
 
-  constructor( private farmsService: FarmsService, private router: Router, private activatedRoute: ActivatedRoute) { }
+  constructor( private farmsService: FarmsService, private router: Router, private activatedRoute: ActivatedRoute) { 
+
+  }
  
   ngOnInit() {
     const params = this.activatedRoute.snapshot.params;
@@ -41,9 +46,12 @@ export class FarmFormComponent implements OnInit {
   }
 
   saveNewFarm(){
-    //console.log(this.farm);
+    
     delete this.farm.id;
     delete this.farm.created_at;
+    delete this.farm.size;
+
+    //console.log(this.farm);
     this.farmsService.saveFarm(this.farm)
       .subscribe(
         res => {
@@ -56,8 +64,10 @@ export class FarmFormComponent implements OnInit {
 
   updateFarm(){
     delete this.farm.created_at;
+    delete this.farm.size;
+    
     //console.log(this.farm)
-    this.farmsService.updateFarm(this.farm.id, this.farm)
+    this.farmsService.updateFarm(this.farm.id!, this.farm)
     .subscribe(
       res => {
         console.log(res);

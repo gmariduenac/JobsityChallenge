@@ -8,7 +8,7 @@ class FarmController{
         //res.send('Farms')
         //pool.query('DESCRIBE farm');
         //res.json({text:'Listing farms'});
-        const farms = await pool.query('SELECT * FROM farm', function (error, results, fields) {
+        const farms = await pool.query('select farm.id as id, farm.name as name, farm.description as description, farm.image as image, farm.created_at as created_at, coalesce(sum(pond.size),0) as size from farm left join pond on farm.id = pond.id_farm_fk group by farm.id, farm.name, farm.description, farm.image, farm.created_at', function (error, results, fields) {
             if (error) throw error;
             //console.log('The solution is: ', results);
             if (results.length>0){
@@ -22,7 +22,7 @@ class FarmController{
 
     public async getById (req: Request, res: Response): Promise<void>{
         const { id } = req.params;
-        const farms = await pool.query('SELECT * FROM farm where id = ?', [id], function (error, results, fields) {
+        const farms = await pool.query('select farm.id as id, farm.name as name, farm.description as description, farm.image as image, farm.created_at as created_at, coalesce(sum(pond.size),0) as size from farm left join pond on farm.id = pond.id_farm_fk  where farm.id=? group by farm.id, farm.name, farm.description, farm.image, farm.created_at', [id], function (error, results, fields) {
             if (error) throw error;
             //console.log('The solution is: ', results);
             if (results.length>0){
@@ -35,10 +35,17 @@ class FarmController{
     }
 
     public async create (req: Request, res: Response): Promise<void> {
-        //console.log(req.body);
-        await pool.query('INSERT INTO farm set ?',[req.body]);
-        //res.json({text:'Creating a farm'});
-        res.json({message:'Farm saved!'});
+        console.log(req.body);
+        await pool.query('INSERT INTO farm set ?',[req.body],function (error, results, fields){
+            //console.log(error)
+            if (error) throw error;
+            //console.log('The solution is: ', results);
+            if (results['affectedRows']>0){
+                return res.json({text:'The farm was created'});
+            }else{
+                return res.status(404).json({text:'The farm could not be created!'})
+            }
+          });
     }
 
     public async delete (req: Request, res: Response): Promise<void> {

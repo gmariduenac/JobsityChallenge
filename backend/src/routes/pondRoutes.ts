@@ -15,6 +15,7 @@ class PondRoutes{
         this.router.post('/', pondController.create);
         this.router.put('/:id',pondController.update);
         this.router.delete('/:id', pondController.delete);
+        this.router.get('/related/:id',pondController.getByIdFarm);
     }
 }
 

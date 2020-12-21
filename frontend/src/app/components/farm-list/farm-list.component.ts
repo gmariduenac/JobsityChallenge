@@ -1,6 +1,7 @@
 import { Component, Host, HostBinding, OnInit } from '@angular/core';
 
 import { FarmsService } from '../../services/farms.service'
+import { PondsService } from '../../services/ponds.service'
 
 @Component({
   selector: 'app-farm-list',
@@ -13,7 +14,10 @@ export class FarmListComponent implements OnInit {
 
   farms: any = [];
 
-  constructor(private farmsService: FarmsService) { }
+  constructor(private farmsService: FarmsService, private pondsService: PondsService) { 
+    this.farms.size=0
+  
+  }
 
   ngOnInit(): void {
     this.getFarms();
@@ -28,18 +32,35 @@ export class FarmListComponent implements OnInit {
     )
   }
 
-  deleteFarm(id: String){
-    this.farmsService.deleteFarm(id).subscribe(
-      res=> {
-        console.log(res);
-        this.getFarms();
+  /*async deleteFarm(id: string){
+    if (await this.hasFarmAPond(id)==true){
+        this.farmsService.deleteFarm(id).subscribe(
+          res=> {
+            this.getFarms();
+          },
+          err => console.log(err)
+        )
+      }
+      else {alert("Farm has ponds assigned. First remove all ponds and then remove the farm")}
+  }*/
+
+  deleteFarm(id:string): void{
+ 
+    let result = this.pondsService.getFarmsRelated(id).subscribe(
+      res=> { 
+          if(Number(res)==0){
+              this.farmsService.deleteFarm(id).subscribe(
+                res=> {
+                        this.getFarms();
+                      },
+                err => console.log(err)
+              )
+          }else{ alert("Farm has ponds assigned. First remove all ponds and then remove the farm")}
       },
-      err => console.log(err)
+      err => {
+        console.log(err)
+      }
     )
   }
-
-  /*editFarm(id: String){
-    console.log(id); 
-  }*/
 
 }

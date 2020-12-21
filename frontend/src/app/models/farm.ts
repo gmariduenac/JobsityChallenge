@@ -5,4 +5,5 @@ export interface Farm{
     description?: string;
     image?: string;
     created_at?: Date;
+    size?: number;
 }
