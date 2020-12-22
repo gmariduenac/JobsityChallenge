@@ -18,7 +18,7 @@ consists in a mysql database which contains two tables with relationships betwee
 
 Here you will see components, modules and services. Each service calls the API rest defined in the backend. I have used Bootstrap 4 to show a clean skin system through public CDN (content delivery network).
 
-# ScreensScreens
+# Screens
 
 There are some screens captured showing the functionality of the system located at "documentation" directory.
 
