@@ -18,7 +18,7 @@ consists in a mysql database which contains two tables with relationships betwee
 
 Here you will see components, modules and services. Each service calls the API rest defined in the backend. I have used Bootstrap 4 to show a clean skin system through public CDN (content delivery network).
 
-# Screens
+# ScreensScreens
 
 There are some screens captured showing the functionality of the system located at "documentation" directory.
 
@@ -69,9 +69,9 @@ The system has been tested on Chrome Release 87 without any issues.
 
 # Improvements:
 
-1.- The system is not tunned, I could configure the system to improve performance and accesibility.
-2.- The system does not have security enabled.
-3.- The UI is simple, I could improve the skin with more Bootstrap classes.
+1. The system is not tunned, I could configure the system to improve performance and accesibility.
+2. The system does not have security enabled.
+3. The UI is simple, I could improve the skin with more Bootstrap classes.
 
 # How to Contribute
 
@@ -80,3 +80,4 @@ This system has been coded for a challenge, anyone is open to clone it, and impr
 # License
 
 This system is build under GNU license. 
+
